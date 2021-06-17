@@ -66,7 +66,7 @@ class ButtonElement(BlockElement):
         action_id: str,
         url: str = None,
         value: str = None,
-        style: str = "default",
+        style: str = None,
         confirm: ConfirmObject = None,
     ):
         # validate input

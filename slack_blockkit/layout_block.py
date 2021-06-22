@@ -223,7 +223,7 @@ class SectionBlock(LayoutBlock):
 
     def __init__(
         self,
-        text: TextObject,
+        text: TextObject = None,
         block_id: str = None,
         fields: List[TextObject] = None,
         accessory: BlockElement = None,
@@ -232,7 +232,7 @@ class SectionBlock(LayoutBlock):
 
         # field validation
         # text can be no longer than 3000 characters
-        if text.get_text_length() > 3000:
+        if text and text.get_text_length() > 3000:
             raise AttributeError(
                 f"text cannot be more than 3000 characters, but got {text.get_text_length()}"
             )

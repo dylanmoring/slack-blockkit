@@ -185,7 +185,7 @@ class InputBlock(LayoutBlock):
         element: BlockElement,
         block_id: str = None,
         hint: TextObject = None,
-        optional: bool = False,
+        optional: bool = None,
     ):
         # validate input
         label.validate_text_block(

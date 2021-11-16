@@ -93,7 +93,7 @@ class ViewPayload:
         block = {
             "type": self.btype,
             "title": self.title.render(),
-            "blocks": self.blocks,
+            "blocks": [block.render() for block in self.blocks]
         }
 
         # optional parameters

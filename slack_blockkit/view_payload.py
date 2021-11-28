@@ -105,9 +105,9 @@ class ViewPayload:
             block.update({"private_metadata": self.private_metadata})
         if self.callback_id:
             block.update({"callback_id": self.callback_id})
-        if not self.clear_on_close:
+        if self.clear_on_close:
             block.update({"clear_on_close": self.clear_on_close})
-        if not self.notify_on_close:
+        if self.notify_on_close:
             block.update({"notify_on_close": self.notify_on_close})
         if self.external_id:
             block.update({"external_id": self.external_id})

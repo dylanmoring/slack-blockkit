@@ -5,6 +5,7 @@ from .block import Block
 from .composition_object import (
     ConfirmObject,
     OptionObject,
+    OptionGroupObject,
     TextObject,
 )
 from slack_blockkit.utils import get_validated_input
@@ -368,5 +369,42 @@ class RadioButtonGroupElement(BlockElement):
         super().__init__(btype="radio_buttons", action_id=action_id)
 
         self.options = options
+        self.initial_option = intitial_option
+        self.confirm = confirm
+
+
+class StaticSelectElement(BlockElement):
+    """
+    A radio button group that allows a user to choose one item from a list of possible options. For more information,
+    see: https://api.slack.com/reference/block-kit/block-elements#radio
+
+    Args:
+        action_id (str): An identifier for the action triggered when a menu option is selected. You can use this when
+            you receive an interaction payload to identify the source of the action. Should be unique among all other
+            ``action_id`` used elsewhere by your app. Maximum length for this field is 255 characters.
+        options (List[OptionObject]): An array of :class:`OptionObject`.
+        initial_option (OptionObject): An :class:`OptionObject` that exactly matches one of the options within options.
+            This option will be selected when the radio button group initially loads.
+        confirm (ConfirmObject): A :class:`ConfirmObject` that defines an optional confirmation dialog that appears
+            after clicking one of the radio buttons in this element.
+    """
+
+    def __init__(
+        self,
+        action_id: str,
+        placeholder: TextObject,
+        options: List[OptionObject],
+        option_groups: List[OptionGroupObject] = None,
+        initial_option: OptionObject = None,
+        confirm: ConfirmObject = None,
+    ):
+        # validate input
+        if intitial_option and intitial_option not in options:
+            raise AttributeError("initial_option must be an option within options")
+        super().__init__(btype="static_select", action_id=action_id)
+
+        self.placeholder = placeholder
+        self.options = options
+        self.option_groups = option_groups
         self.initial_option = intitial_option
         self.confirm = confirm

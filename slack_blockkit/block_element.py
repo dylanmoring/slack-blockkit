@@ -360,16 +360,16 @@ class RadioButtonGroupElement(BlockElement):
         self,
         action_id: str,
         options: List[OptionObject],
-        intitial_option: OptionObject = None,
+        initial_option: OptionObject = None,
         confirm: ConfirmObject = None,
     ):
         # validate input
-        if intitial_option and intitial_option not in options:
+        if initial_option and initial_option not in options:
             raise AttributeError("initial_option must be an option within options")
         super().__init__(btype="radio_buttons", action_id=action_id)
 
         self.options = options
-        self.initial_option = intitial_option
+        self.initial_option = initial_option
         self.confirm = confirm
 
 
@@ -399,12 +399,12 @@ class StaticSelectElement(BlockElement):
         confirm: ConfirmObject = None,
     ):
         # validate input
-        if intitial_option and intitial_option not in options:
+        if initial_option and initial_option not in options:
             raise AttributeError("initial_option must be an option within options")
         super().__init__(btype="static_select", action_id=action_id)
 
         self.placeholder = placeholder
         self.options = options
         self.option_groups = option_groups
-        self.initial_option = intitial_option
+        self.initial_option = initial_option
         self.confirm = confirm

@@ -40,7 +40,11 @@ def get_validated_input(
     if value:
         # parameter type
         if not isinstance(value, ptype):
-            raise AttributeError("value {} not type {}".format(value, ptype))
+            # Try coercing type
+            try:
+                value = ptype(value)
+            except (ValueError, TypeError):
+                raise AttributeError("value {} not type {}".format(value, ptype))
 
         # min/max length
         if min_length or max_length:

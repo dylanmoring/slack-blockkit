@@ -1,5 +1,6 @@
 from typing import List
 
+from .utils.utils import get_validated_input
 from .block import Block
 from .composition_object import TextObject
 
@@ -64,17 +65,12 @@ class ViewPayload:
                 )
 
         # private_metadata must be 3000 characters or less
-        if private_metadata and len(private_metadata) > 3000:
-            raise AttributeError(
-                f"private_metadata must be 3000 characters or less. Currently {len(private_metadata)}"
-            )
+        if private_metadata:
+            private_metadata = get_validated_input(private_metadata, str, max_length=3000)
 
         # callbacl_id must be 255 characters or less
-        if callback_id and len(callback_id) > 255:
-            raise AttributeError(
-                f"callback_id must be 3000 characters or less. Currently {len(callback_id)}"
-            )
-
+        if callback_id:
+            callback_id = get_validated_input(callback_id, str, max_length=255)
         self.btype = btype
         # titles are used only for modals
         if self.btype == self.BTYPE_MODAL:
